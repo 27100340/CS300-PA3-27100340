@@ -9,7 +9,6 @@
     "build": "tsc",
     "start": "node dist/server.js"
   },
-  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
