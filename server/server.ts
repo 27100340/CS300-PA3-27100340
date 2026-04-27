@@ -13,33 +13,18 @@ const io = new Server(server, {
   },
 });
 const port = process.env.PORT;
-
 //test db
 const mongouri = process.env.MONGO_URI
-// if (!mongouri) {
-//   console.log("error");
-// }
-// else {
-//   mongoose.connect(mongouri, { serverSelectionTimeoutMS: 5000 }).then(() => {
-//     console.log("Connected to Mongo DB");
-//   }).catch((err) => {
-//     console.log("mongo db connection failed due to: " + err);
-//   })
-// }
-
-console.log("MONGO_URI value:", mongouri, "type:", typeof mongouri);
-console.log("about to enter if block");
-if (mongouri) {
-  console.log("inside if block, calling connect");
-  mongoose.connect(mongouri, { serverSelectionTimeoutMS: 5000 })
-    .then(() => console.log("Connected to Mongo DB"))
-    .catch(err => console.log("mongo connect FAILED:", err));
-} else {
-  console.log("MONGO URI NOT SET IN ENV");
+if (!mongouri) {
+  console.log("error");
 }
-// config({
-//   path: "./config.env",
-// });
+else {
+  mongoose.connect(mongouri, { serverSelectionTimeoutMS: 5000 }).then(() => {
+    console.log("Connected to Mongo DB");
+  }).catch((err) => {
+    console.log("mongo db connection failed due to: " + err);
+  })
+}
 
 io.on("connection", (socket) => {
   console.log("USER CONNECTED:", socket.id);

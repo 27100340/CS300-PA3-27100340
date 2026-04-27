@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import auth_router from "./routes/authroutes";
 
 export const app = express();
 app.use((req,res,next)=>{
@@ -9,8 +10,4 @@ app.use((req,res,next)=>{
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.post('/signup',(req,res)=>{
-    console.log(req.body);
-    res.status(201).json({success:true,message:"test signup endpoint backend success"});
-})
+app.use('/api/auth',auth_router);
