@@ -21,7 +21,7 @@ const Signup = () => {
         <div className="page">
             <div className="auth-container">
                 <div className="auth-header">
-                    <h1 onClick={()=>navigator("/home")} className="auth-title">🎲 LUDO</h1>
+                    <h1 onClick={()=>navigator("/")} className="auth-title">🎲 LUDO</h1>
                     <p className="auth-subtitle">Create Your Account</p>
                 </div>
 

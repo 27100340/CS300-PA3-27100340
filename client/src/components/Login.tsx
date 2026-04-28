@@ -1,17 +1,23 @@
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import handleLogin from "../handlers/login_handler";
 
 const Login = () => {
     const [name,setName] = useState("");
     const [pw,setPw] = useState("");
+    const [error,setError] = useState("");
 
     const navigator = useNavigate();
+
+    useEffect(()=>{
+        setError("");
+    },[name,pw])
 
     return (
         <div className="page">
             <div className="auth-container">
                 <div className="auth-header">
-                    <h1 onClick={()=>navigator("/home")} className="auth-title">🎲 LUDO</h1>
+                    <h1 onClick={()=>navigator("/")} className="auth-title">🎲 LUDO</h1>
                     <p className="auth-subtitle">Welcome Back</p>
                 </div>
 
@@ -24,6 +30,7 @@ const Login = () => {
                             <input
                                 type="text"
                                 value={name}
+                                onChange={(e)=>setName(e.target.value)}
                                 className="form-input"
                                 placeholder="Enter your username"
                                 required
@@ -37,6 +44,7 @@ const Login = () => {
                             <input
                                 type="password"
                                 value={pw}
+                                onChange={(e)=>setPw(e.target.value)}
                                 className="form-input"
                                 placeholder="Enter your password"
                                 required
@@ -44,8 +52,9 @@ const Login = () => {
                             />
                         </div>
 
-                        <button type="button"  className="form-button">Login</button>
+                        <button type="button" onClick={()=>handleLogin(name,pw,setError)}  className="form-button">Login</button>
                     </form>
+                    {error && <p style={{color:'red'}}>{error}</p>}
 
                     <div className="auth-footer">
                         <p>Don't have an account? <button onClick={()=>navigator("/signup")} className="auth-link">Sign Up</button></p>
