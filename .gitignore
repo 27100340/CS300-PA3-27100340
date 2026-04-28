@@ -82,6 +82,8 @@ config.env
 
 # Claude collaboration notes (private, not for submission/repo)
 claude/
+.claude/
+CLAUDE.md
 
 # Qodo / other local AI tool artifacts
 .qodo/
