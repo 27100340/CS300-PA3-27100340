@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 
-interface UserI{
+export interface UserI{
+    _id:mongoose.Schema.Types.ObjectId;
     username : string,
     password: string,
     dob : Date

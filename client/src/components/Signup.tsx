@@ -15,13 +15,13 @@ const Signup = () => {
         if (error) {
             setError("");
         }
-    }, [name,pw,dob,cpw])
+    }, [name, pw, dob, cpw])
 
     return (
         <div className="page">
             <div className="auth-container">
                 <div className="auth-header">
-                    <h1 onClick={()=>navigator("/")} className="auth-title">🎲 LUDO</h1>
+                    <h1 onClick={() => navigator("/")} className="auth-title">🎲 LUDO</h1>
                     <p className="auth-subtitle">Create Your Account</p>
                 </div>
 
@@ -82,13 +82,13 @@ const Signup = () => {
                             />
                         </div>
 
-                        <button type="button" onClick={() => handlesignup(pw, cpw, name, dob, setError)} className="form-button">Create Account</button>
+                        <button type="button" onClick={() => handlesignup(pw, cpw, name, dob, setError, navigator)} className="form-button">Create Account</button>
                     </form>
                     <div>
-                        {error && <p style={{color:"red"}} className="form-error">{error}</p>}
+                        {error && <p style={{ color: "red" }} className="form-error">{error}</p>}
                     </div>
                     <div className="auth-footer">
-                        <p>Already have an account? <button onClick={()=>navigator("/login")} className="auth-link">Login/</button></p>
+                        <p>Already have an account? <button onClick={() => navigator("/login")} className="auth-link">Login</button></p>
                     </div>
                 </div>
             </div>

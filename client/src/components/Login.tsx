@@ -1,11 +1,12 @@
-import { use, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import handleLogin from "../handlers/login_handler";
-
+import { useAuth } from "../contexts/AuthContext";
 const Login = () => {
     const [name,setName] = useState("");
     const [pw,setPw] = useState("");
     const [error,setError] = useState("");
+    const {merequest} = useAuth();
 
     const navigator = useNavigate();
 
@@ -52,7 +53,7 @@ const Login = () => {
                             />
                         </div>
 
-                        <button type="button" onClick={()=>handleLogin(name,pw,setError)}  className="form-button">Login</button>
+                        <button type="button" onClick={()=>handleLogin(name,pw,setError,navigator,merequest)}  className="form-button">Login</button>
                     </form>
                     {error && <p style={{color:'red'}}>{error}</p>}
 
