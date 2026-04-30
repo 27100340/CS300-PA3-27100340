@@ -4,12 +4,16 @@ import http from "http";
 import { app } from "./app";
 dotenv.config({ path: "./config.env" });
 import mongoose from "mongoose";
+import socket_auth_interceptor from "./interceptors/socket/auth_interceptor";
+import { joinLobby, getRoom, leaveLobby } from "./utils/rooms";
+import { connectionHandler, disconnectOrRemoveHandler } from "./utils/socket_utils";
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST"],
-    credentials: false,
+    credentials: true,
   },
 });
 const port = process.env.PORT;
@@ -26,8 +30,20 @@ else {
   })
 }
 
+io.use(socket_auth_interceptor);
 io.on("connection", (socket) => {
   console.log("USER CONNECTED:", socket.id);
+  socket.on("room:join", async () => {
+    connectionHandler(socket, io);
+  })
+
+  socket.on("room:leave", async () => {
+    disconnectOrRemoveHandler(socket, io);
+  })
+
+  socket.on("disconnect", async () => {
+    disconnectOrRemoveHandler(socket, io);
+  })
 });
 
 server.listen(port, () => {
